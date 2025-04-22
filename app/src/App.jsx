@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import SearchResult from "./components/SearchResults/SearchResult";
+import ContactUs from "./components/SearchResults/ContactUs";
 
 export const BASE_URL = "http://localhost:9000";
 
@@ -106,7 +107,10 @@ const App = () => {
           ))}
         </FilterContainer>
       </Container>
+      
+      
       <SearchResult data={filteredData} />
+      <ContactUs />
     </>
   );
 };
