@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import SearchResult from "./components/SearchResults/SearchResult";
+import Footer from "./components/footer";
 
 export const BASE_URL = "http://localhost:9000";
 
 const App = () => {
   const [data, setData] = useState(null);
-  const [filteredData, setFilteredData] = useState(null);
+  const [filteredData, setFilteredData] = useState(null);              
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [selectedBtn, setSelectedBtn] = useState("all");
@@ -17,7 +18,6 @@ const App = () => {
 
       try {
         const response = await fetch(BASE_URL);
-
         const json = await response.json();
 
         setData(json);
@@ -32,8 +32,6 @@ const App = () => {
 
   const searchFood = (e) => {
     const searchValue = e.target.value;
-
-    console.log(searchValue);
 
     if (searchValue === "") {
       setFilteredData(null);
@@ -60,22 +58,10 @@ const App = () => {
   };
 
   const filterBtns = [
-    {
-      name: "All",
-      type: "all",
-    },
-    {
-      name: "Breakfast",
-      type: "breakfast",
-    },
-    {
-      name: "Lunch",
-      type: "lunch",
-    },
-    {
-      name: "Dinner",
-      type: "dinner",
-    },
+    { name: "All", type: "all" },
+    { name: "Breakfast", type: "breakfast" },
+    { name: "Lunch", type: "lunch" },
+    { name: "Dinner", type: "dinner" },
   ];
 
   if (error) return <div>{error}</div>;
@@ -107,6 +93,8 @@ const App = () => {
         </FilterContainer>
       </Container>
       <SearchResult data={filteredData} />
+
+      <Footer /> {/* This will display the footer */}
     </>
   );
 };
@@ -117,6 +105,7 @@ export const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
 `;
+
 const TopContainer = styled.section`
   height: 140px;
   display: flex;
@@ -137,11 +126,6 @@ const TopContainer = styled.section`
         color: white;
       }
     }
-  }
-
-  @media (0 < width < 600px) {
-    flex-direction: column;
-    height: 120px;
   }
 `;
 
